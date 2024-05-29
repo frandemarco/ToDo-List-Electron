@@ -1,0 +1,27 @@
+<head>
+
+</head>
+<body>
+    <h1>My Todos</h1>
+    <ul>
+
+    </ul>
+    <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+        var todos= [];
+        ipcRenderer.on('todo:add',(event, todo) =>{
+            todos.push(todo);
+            updatePage();
+        })
+        function updatePage(){
+            document.querySelector('ul').innerHTML="";
+            for(let i=0;i<todos.length;i++){
+            const li =document.createElement('li');
+            const text = document.createTextNode(todos[i]);
+            li.appendChild(text);
+            document.querySelector('ul').appendChild(li);
+            }
+        }
+    </script>
+</body>
